@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "AI Character Chat DEV",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "flutterMode": "debug",
+            "toolArgs": ["--flavor", "dev"],
+            "args": ["--dart-define-from-file", "config/dev.json"]
+        },
+        {
+            "name": "AI Character Chat STAGING",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "program": "lib/main_staging.dart",
+            "toolArgs": ["--flavor", "staging"],
+            "args": ["--dart-define-from-file", "config/staging.json"]
+        },
+        {
+            "name": "AI Character Chat PROD",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main_prod.dart",
+            "toolArgs": ["--flavor", "prod"],
+            "args": ["--dart-define-from-file", "config/prod.json"]
+        }
+    ]
+}
