@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:ai_character_chat_mobile/app/app_bloc_observer.dart';
+import 'package:ai_character_chat_mobile/config/app_config.dart';
 import 'package:ai_character_chat_mobile/di/di.dart';
 import 'package:ai_character_chat_mobile/flavors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -12,21 +13,21 @@ typedef BootstrapBuilder = FutureOr<Widget> Function();
 
 Future<void> bootstrap(BootstrapBuilder builder, Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppFlavor.appFlavor = flavor;
-
-  await initializeApp();
-
-  runApp(
-    await builder(),
+  final AppConfig appConfig = AppConfig.fromEnvironment(
+    expectedEnvironment: flavor.environment,
   );
+
+  await initializeApp(appConfig: appConfig);
+
+  runApp(await builder());
 }
 
-Future<void> initializeApp() async {
+Future<void> initializeApp({required AppConfig appConfig}) async {
   await Hive.initFlutter();
 
   await Future.wait([
     EasyLocalization.ensureInitialized(),
-    configureDependencies(),
+    configureDependencies(appConfig: appConfig),
   ]);
   EasyLocalization.logger.enableBuildModes = [];
 

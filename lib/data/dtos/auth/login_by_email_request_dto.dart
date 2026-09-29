@@ -4,10 +4,7 @@ part 'login_by_email_request_dto.g.dart';
 
 @JsonSerializable(createFactory: false)
 class LoginByEmailRequestDTO {
-  LoginByEmailRequestDTO({
-    required this.email,
-    required this.password,
-  });
+  LoginByEmailRequestDTO({required this.email, required this.password});
   final String email;
   final String password;
 

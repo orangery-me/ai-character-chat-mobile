@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:ai_character_chat_mobile/data/datasources/chat/chat_datasource.dart';
 import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';
 
-@injectable
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final ChatDatasource _chatDatasource;
 

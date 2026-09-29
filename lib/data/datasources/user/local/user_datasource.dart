@@ -1,15 +1,11 @@
 import 'dart:convert';
 
 import 'package:ai_character_chat_mobile/common/constants/hive_keys.dart';
-import 'package:ai_character_chat_mobile/data/dtos/auth/login_response_dto.dart';
 import 'package:ai_character_chat_mobile/data/models/user_model.dart';
 import 'package:hive/hive.dart';
-import 'package:injectable/injectable.dart';
 
-@lazySingleton
 class UserLocalDataSource {
-  UserLocalDataSource({@Named(HiveKeys.authBox) required Box<dynamic> authBox})
-    : _authBox = authBox;
+  UserLocalDataSource({required Box<dynamic> authBox}) : _authBox = authBox;
 
   final Box<dynamic> _authBox;
 
@@ -26,17 +22,8 @@ class UserLocalDataSource {
   }
 
   Future<void> setUserInfo(UserModel user) async {
-    await _authBox.put(HiveKeys.user, jsonEncode(user));
+    await _authBox.put(HiveKeys.user, jsonEncode(user.toJson()));
   }
 
-  Future<void> setUserAuth(LoginResponseDTO? response) async {
-    if (response == null) {
-      await _authBox.clear();
-    } else {
-      await _authBox.putAll({
-        ...response.toRefreshTokenDTO().toLocalJson(),
-        // HiveKeys.user: jsonEncode(response.user),
-      });
-    }
-  }
+  Future<void> clearUserInfo() => _authBox.delete(HiveKeys.user);
 }

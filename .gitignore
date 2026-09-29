@@ -52,6 +52,7 @@ app.*.map.json
 config.json
 mock_data.json
 .env
+.env.*
 
 #test
 venv/

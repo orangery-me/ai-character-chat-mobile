@@ -1,39 +1,42 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:ai_character_chat_mobile/common/constants/hive_keys.dart';
+import 'package:ai_character_chat_mobile/config/app_config.dart';
+import 'package:ai_character_chat_mobile/data/repositories/session_repository.dart';
 import 'package:ai_character_chat_mobile/di/interceptors/app_interceptor.dart';
-import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:injectable/injectable.dart';
+import 'package:dio/dio.dart';
 
-@lazySingleton
 class DioProvider {
-  DioProvider(@Named(HiveKeys.authBox) this._authBox, this._nagivatorKey);
-  final Box<dynamic> _authBox;
-  final GlobalKey<NavigatorState> _nagivatorKey;
+  DioProvider({
+    required AppConfig appConfig,
+    required SessionRepository sessions,
+  }) : _appConfig = appConfig,
+       _sessions = sessions;
 
+  final AppConfig _appConfig;
+  final SessionRepository _sessions;
   Dio? _dio;
-  Dio getDio() => _dio ?? _createDio();
 
-  Dio _createDio() {
-    final interceptorDio = Dio();
-    final refreshTokenDio = Dio();
+  Dio getDio() {
+    final cached = _dio;
+    if (cached != null) return cached;
 
-    final appInterceptor = AppInterceptor(
-      authBox: _authBox,
-      dio: refreshTokenDio,
-      navigatorKey: _nagivatorKey
+    final dio = createBaseDio(_appConfig);
+    dio.interceptors.add(AppInterceptor(sessions: _sessions, dio: dio));
+    _dio = dio;
+    return dio;
+  }
+
+  static Dio createBaseDio(AppConfig config) {
+    return Dio(
+      BaseOptions(
+        baseUrl: config.baseUrl,
+        connectTimeout: Duration(milliseconds: config.connectTimeoutMs),
+        receiveTimeout: Duration(milliseconds: config.receiveTimeoutMs),
+        sendTimeout: Duration(milliseconds: config.sendTimeoutMs),
+        headers: <String, String>{
+          HttpHeaders.contentTypeHeader: ContentType.json.value,
+        },
+      ),
     );
-    final interceptors = <Interceptor>[appInterceptor];
-
-    return interceptorDio
-      ..options.headers = {
-        HttpHeaders.contentTypeHeader: ContentType.json.value,
-      }
-      ..options.connectTimeout = const Duration(seconds: 30)
-      ..options.receiveTimeout = const Duration(seconds: 30)
-      ..options.sendTimeout = const Duration(seconds: 30)
-      ..interceptors.addAll(interceptors);
   }
 }

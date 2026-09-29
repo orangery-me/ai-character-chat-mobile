@@ -1,3 +1,10 @@
 {
-  "BASE_URL": "https://api.ai-character-chat.example.com/api"
+  "APP_ENV": "production",
+  "BASE_URL": "https://api.example.invalid",
+  "CONNECT_TIMEOUT_MS": 30000,
+  "SEND_TIMEOUT_MS": 30000,
+  "RECEIVE_TIMEOUT_MS": 30000,
+  "ALLOW_CLEAR_TEXT_HTTP": false,
+  "SUPABASE_URL": "https://gqqbbbbbbbbbbbb.supabase.co",
+  "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_tvOH3EI__3S2U9k57xTLYg_YOLge7tS"
 }

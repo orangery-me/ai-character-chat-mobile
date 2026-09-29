@@ -9,6 +9,10 @@ abstract class AuthEvent extends Equatable {
 
 class AuthUserInfoCheck extends AuthEvent {}
 
+class AuthLogoutRequested extends AuthEvent {}
+
+class AuthSessionExpired extends AuthEvent {}
+
 class AuthUserInfoSet extends AuthEvent {
   const AuthUserInfoSet({required this.currentUser});
 

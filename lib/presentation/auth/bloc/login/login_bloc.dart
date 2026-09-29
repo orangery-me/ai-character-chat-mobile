@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ai_character_chat_mobile/data/dtos/api/api_problem.dart';
 import 'package:ai_character_chat_mobile/data/dtos/auth/login_by_email_request_dto.dart';
 import 'package:ai_character_chat_mobile/data/repositories/user_repository.dart';
 import 'package:ai_character_chat_mobile/generated/locale_keys.g.dart';
@@ -37,18 +36,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
 
       _authBloc.add(AuthUserInfoSet(currentUser: user));
-    } catch (err) {
-      log(err.toString());
-      final isUnauthorizedError =
-          err is DioException && err.response?.statusCode == 401;
-
+    } on ApiProblemException catch (error) {
       emit(
         LoginNotSuccess(
-          error: isUnauthorizedError
+          error: error.problem.status == 401
               ? LocaleKeys.validator_incorrect_email_password.tr()
-              : null,
+              : error.problem.detail,
         ),
       );
+    } on DioException {
+      emit(LoginNotSuccess(error: null));
+    } on FormatException {
+      emit(LoginNotSuccess(error: null));
     }
   }
 }

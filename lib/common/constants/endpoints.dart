@@ -1,12 +1,11 @@
-import 'package:ai_character_chat_mobile/flavors.dart';
-
 abstract class Endpoints {
-  static String apiUrl = '${AppFlavor.apiBaseUrl}/v1';
+  static const String apiUrl = '/api/v1';
 
   // auth api
-  static String login = '$apiUrl/oauth/token';
-  static String logout = '$apiUrl/oauth/revoke';
+  static const String login = '$apiUrl/auth/login';
+  static const String logout = '$apiUrl/auth/logout';
+  static const String refresh = '$apiUrl/auth/refresh';
 
   // user api
-  static String getUser = '$apiUrl/user';
+  static const String getUser = '$apiUrl/users/me';
 }

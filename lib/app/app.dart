@@ -1,7 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ai_character_chat_mobile/app/bloc/app_bloc.dart';
 import 'package:ai_character_chat_mobile/common/constants/locales.dart';
 import 'package:ai_character_chat_mobile/data/repositories/user_repository.dart';
@@ -10,18 +6,38 @@ import 'package:ai_character_chat_mobile/flavors.dart';
 import 'package:ai_character_chat_mobile/generated/codegen_loader.g.dart';
 import 'package:ai_character_chat_mobile/presentation/auth/bloc/auth/auth_bloc.dart';
 import 'package:ai_character_chat_mobile/router/app_router.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class App extends StatefulWidget {
-  const App({super.key});
+  const App({required this.flavor, super.key});
+
+  final Flavor flavor;
 
   @override
   State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
-  final GlobalKey<NavigatorState> _navigatorKey =
-      getIt<GlobalKey<NavigatorState>>();
-  NavigatorState get _navigator => _navigatorKey.currentState!;
+  late final AuthBloc _authBloc;
+  late final GoRouter _router;
+
+  @override
+  void initState() {
+    super.initState();
+    _authBloc = AuthBloc(userRepository: getIt<UserRepository>());
+    _router = AppRouter.create(authBloc: _authBloc);
+  }
+
+  @override
+  void dispose() {
+    _router.dispose();
+    _authBloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +49,7 @@ class _AppState extends State<App> {
       useOnlyLangCode: true,
       assetLoader: const CodegenLoader(),
       child: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: ScreenUtilInit(
           designSize: const Size(414, 896),
           minTextAdapt: true,
@@ -43,10 +57,7 @@ class _AppState extends State<App> {
           useInheritedMediaQuery: true,
           child: MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) =>
-                    AuthBloc(userRepository: getIt.get<UserRepository>()),
-              ),
+              BlocProvider.value(value: _authBloc),
               BlocProvider(create: (context) => AppBloc(), lazy: false),
             ],
             child: Builder(
@@ -55,39 +66,17 @@ class _AppState extends State<App> {
                   buildWhen: (previous, current) =>
                       previous.themeMode != current.themeMode,
                   builder: (context, state) {
-                    return MaterialApp(
-                      navigatorKey: _navigatorKey,
-                      title: AppFlavor.title,
+                    return MaterialApp.router(
+                      routerConfig: _router,
+                      title: widget.flavor.title,
                       theme: themes[ThemeMode.light]!.themeData,
                       darkTheme: themes[ThemeMode.dark]!.themeData,
-                      themeMode: context.read<AppBloc>().state.themeMode,
-                      onGenerateRoute: AppRouter.onGenerateRoute,
-                      initialRoute: AppRouter.splash,
+                      themeMode: state.themeMode,
                       localizationsDelegates: context.localizationDelegates,
                       supportedLocales: context.supportedLocales,
                       locale: context.locale,
                       debugShowCheckedModeBanner: false,
-                      builder: (_, child) {
-                        return BlocListener<AuthBloc, AuthState>(
-                          listener: (_, state) {
-                            switch (state.status) {
-                              case AuthenticationStatus.unknown:
-                                break;
-                              case AuthenticationStatus.authenticated:
-                                _navigator.pushNamedAndRemoveUntil(
-                                  AppRouter.root,
-                                  (route) => false,
-                                );
-                              case AuthenticationStatus.unauthenticated:
-                                _navigator.pushNamedAndRemoveUntil(
-                                  AppRouter.login,
-                                  (route) => false,
-                                );
-                            }
-                          },
-                          child: SafeArea(child: child!),
-                        );
-                      },
+                      builder: (context, child) => SafeArea(child: child!),
                     );
                   },
                 );

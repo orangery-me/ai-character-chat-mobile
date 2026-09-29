@@ -1,3 +1,10 @@
 {
-  "BASE_URL": "http://localhost:8105/api"
+  "APP_ENV": "development",
+  "BASE_URL": "http://10.0.2.2:8105",
+  "CONNECT_TIMEOUT_MS": 30000,
+  "SEND_TIMEOUT_MS": 30000,
+  "RECEIVE_TIMEOUT_MS": 30000,
+  "ALLOW_CLEAR_TEXT_HTTP": true,
+  "SUPABASE_URL": "https://gqqbbbbbbbbbbbb.supabase.co",
+  "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_tvOH3EI__3S2U9k57xTLYg_YOLge7tS"
 }
