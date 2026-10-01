@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ai_character_chat_mobile/common/theme/app_size.dart';
 import 'package:ai_character_chat_mobile/common/theme/palette.dart';
 import 'package:ai_character_chat_mobile/common/theme/text_styles.dart';
+import 'package:ai_character_chat_mobile/common/theme/terra_colors.dart';
+import 'package:ai_character_chat_mobile/common/theme/terra_layout.dart';
+import 'package:ai_character_chat_mobile/common/theme/terra_typography.dart';
 
 extension ContextExtension on BuildContext {
   /// The same of [MediaQuery.of(context).size]
@@ -37,4 +40,10 @@ extension ContextExtension on BuildContext {
   AppTextStyles get textStyles => Theme.of(this).extension<AppTextStyles>()!;
 
   Palette get palette => Theme.of(this).extension<Palette>()!;
+
+  TerraColors get terraColors => Theme.of(this).extension<TerraColors>()!;
+  TerraSpacing get terraSpacing => Theme.of(this).extension<TerraSpacing>()!;
+  TerraRadii get terraRadii => Theme.of(this).extension<TerraRadii>()!;
+  TerraSizes get terraSizes => Theme.of(this).extension<TerraSizes>()!;
+  TerraTypography get terraTypography => Theme.of(this).extension<TerraTypography>()!;
 }

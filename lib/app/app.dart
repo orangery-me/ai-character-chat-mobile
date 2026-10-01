@@ -1,5 +1,5 @@
-import 'package:ai_character_chat_mobile/app/bloc/app_bloc.dart';
 import 'package:ai_character_chat_mobile/common/constants/locales.dart';
+import 'package:ai_character_chat_mobile/common/theme/app_theme.dart';
 import 'package:ai_character_chat_mobile/data/repositories/user_repository.dart';
 import 'package:ai_character_chat_mobile/di/di.dart';
 import 'package:ai_character_chat_mobile/flavors.dart';
@@ -29,7 +29,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     _authBloc = AuthBloc(userRepository: getIt<UserRepository>());
-    _router = AppRouter.create(authBloc: _authBloc);
+    _router = AppRouter.create(authBloc: _authBloc, flavor: widget.flavor);
   }
 
   @override
@@ -58,29 +58,18 @@ class _AppState extends State<App> {
           child: MultiBlocProvider(
             providers: [
               BlocProvider.value(value: _authBloc),
-              BlocProvider(create: (context) => AppBloc(), lazy: false),
             ],
             child: Builder(
-              builder: (context) {
-                return BlocBuilder<AppBloc, AppState>(
-                  buildWhen: (previous, current) =>
-                      previous.themeMode != current.themeMode,
-                  builder: (context, state) {
-                    return MaterialApp.router(
-                      routerConfig: _router,
-                      title: widget.flavor.title,
-                      theme: themes[ThemeMode.light]!.themeData,
-                      darkTheme: themes[ThemeMode.dark]!.themeData,
-                      themeMode: state.themeMode,
-                      localizationsDelegates: context.localizationDelegates,
-                      supportedLocales: context.supportedLocales,
-                      locale: context.locale,
-                      debugShowCheckedModeBanner: false,
-                      builder: (context, child) => SafeArea(child: child!),
-                    );
-                  },
-                );
-              },
+              builder: (context) => MaterialApp.router(
+                routerConfig: _router,
+                title: widget.flavor.title,
+                theme: terraLightTheme,
+                themeMode: ThemeMode.light,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                debugShowCheckedModeBanner: false,
+              ),
             ),
           ),
         ),

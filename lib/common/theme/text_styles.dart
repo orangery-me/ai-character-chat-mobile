@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ai_character_chat_mobile/common/theme/palette.dart';
-import 'package:ai_character_chat_mobile/generated/fonts.gen.dart';
+import 'package:ai_character_chat_mobile/common/theme/terra_colors.dart';
+import 'package:ai_character_chat_mobile/common/theme/terra_typography.dart';
 
 extension on TextStyle {
   TextStyle get w4 => copyWith(fontWeight: FontWeight.w400);
@@ -11,7 +12,7 @@ extension on TextStyle {
 
 class Fonts {
   static const TextStyle _defaultTextStyle = TextStyle(
-    fontFamily: FontFamily.openSans,
+    fontFamily: 'NunitoSans',
   );
 
   static final TextStyle s10w4 = _defaultTextStyle.copyWith(fontSize: 9.sp).w4;
@@ -94,6 +95,32 @@ class AppTextStyles extends ThemeExtension<AppTextStyles> {
       hintTextField: Fonts.s14w4.copyWith(color: palette.hintTextField),
       errorTextField: Fonts.s12w4.copyWith(color: palette.errorButtonLabel),
       helperTexField: Fonts.s12w4.copyWith(color: palette.normalText),
+    );
+  }
+
+  factory AppTextStyles.fromTerra(
+    TerraColors colors,
+    TerraTypography typography,
+  ) {
+    return AppTextStyles(
+      heading1: typography.displaySmall.copyWith(color: colors.textPrimary),
+      heading2: typography.headlineMedium.copyWith(color: colors.textPrimary),
+      heading3: typography.headlineSmall.copyWith(color: colors.textPrimary),
+      heading4: typography.titleSmall.copyWith(color: colors.textPrimary),
+      subHeading1: typography.titleMedium.copyWith(color: colors.textPrimary),
+      subHeading2: typography.titleSmall.copyWith(color: colors.textPrimary),
+      body1: typography.bodyMedium.copyWith(color: colors.textPrimary, fontWeight: FontWeight.w600),
+      body2: typography.bodyMedium.copyWith(color: colors.textPrimary),
+      metadata1: typography.bodySmall.copyWith(color: colors.textSecondary),
+      metadata2: typography.labelSmall.copyWith(color: colors.textSecondary),
+      metadata3: typography.labelSmall.copyWith(color: colors.textPrimary),
+      errorButtonLabel: typography.labelLarge.copyWith(color: colors.error),
+      buttonLabel: typography.labelLarge.copyWith(color: colors.onPrimary),
+      textFieldLabel: typography.labelLarge.copyWith(color: colors.textPrimary),
+      textField: typography.bodyMedium.copyWith(color: colors.textPrimary),
+      hintTextField: typography.bodyMedium.copyWith(color: colors.textSecondary),
+      errorTextField: typography.bodySmall.copyWith(color: colors.error),
+      helperTexField: typography.bodySmall.copyWith(color: colors.textSecondary),
     );
   }
 

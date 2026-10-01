@@ -12,6 +12,18 @@ import 'package:flutter/widgets.dart';
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
+  /// File path: assets/fonts/Literata-OFL.txt
+  String get literataOFL => 'assets/fonts/Literata-OFL.txt';
+
+  /// File path: assets/fonts/Literata-Variable.ttf
+  String get literataVariable => 'assets/fonts/Literata-Variable.ttf';
+
+  /// File path: assets/fonts/NunitoSans-OFL.txt
+  String get nunitoSansOFL => 'assets/fonts/NunitoSans-OFL.txt';
+
+  /// File path: assets/fonts/NunitoSans-Variable.ttf
+  String get nunitoSansVariable => 'assets/fonts/NunitoSans-Variable.ttf';
+
   /// File path: assets/fonts/OpenSans-Bold.ttf
   String get openSansBold => 'assets/fonts/OpenSans-Bold.ttf';
 
@@ -26,6 +38,10 @@ class $AssetsFontsGen {
 
   /// List of all assets
   List<String> get values => [
+    literataOFL,
+    literataVariable,
+    nunitoSansOFL,
+    nunitoSansVariable,
     openSansBold,
     openSansMedium,
     openSansRegular,
@@ -48,6 +64,24 @@ class $AssetsImagesGen {
 
   /// Directory path: assets/images/banners
   $AssetsImagesBannersGen get banners => const $AssetsImagesBannersGen();
+
+  /// Directory path: assets/images/preview
+  $AssetsImagesPreviewGen get preview => const $AssetsImagesPreviewGen();
+}
+
+class $AssetsImagesPreviewGen {
+  const $AssetsImagesPreviewGen();
+
+  /// File path: assets/images/preview/character_avatar.png
+  AssetGenImage get characterAvatar =>
+      const AssetGenImage('assets/images/preview/character_avatar.png');
+
+  /// File path: assets/images/preview/featured_story.jpg
+  AssetGenImage get featuredStory =>
+      const AssetGenImage('assets/images/preview/featured_story.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [characterAvatar, featuredStory];
 }
 
 class $AssetsLocalesGen {

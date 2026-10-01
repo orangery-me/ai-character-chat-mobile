@@ -12,9 +12,31 @@
     "try_again": "Thử lại"
   },
   "root": {
-    "home": "Trang chủ",
+    "home": "Khám phá",
+    "explore": "Khám phá",
+    "messages": "Tin nhắn",
+    "novels": "Tiểu thuyết",
     "profile": "Cá nhân",
     "management": "Quản lý"
+  },
+  "terra": {
+    "create_character": "Tạo nhân vật",
+    "character_detail": "Chi tiết nhân vật",
+    "chat": "Trò chuyện",
+    "novel_reader": "Đọc tiểu thuyết",
+    "search": "Tìm kiếm",
+    "filter": "Bộ lọc",
+    "clear": "Xóa nội dung",
+    "loading": "Đang tải",
+    "empty": "Chưa có nội dung",
+    "error": "Không thể tải nội dung",
+    "retry": "Thử lại",
+    "image_unavailable": "Không có hình ảnh",
+    "online": "Đang trực tuyến",
+    "preview": "Nội dung xem trước",
+    "preview_notice": "Các thao tác ở màn hình này chỉ dùng để xem trước giao diện.",
+    "back": "Quay lại",
+    "close": "Đóng"
   },
   "auth": {
     "welcome_back": "Rất vui khi được gặp lại bạn!",

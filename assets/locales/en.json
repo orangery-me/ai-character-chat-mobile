@@ -12,9 +12,31 @@
     "try_again": "Try again"
   },
   "root": {
-    "home": "Home",
+    "home": "Explore",
+    "explore": "Explore",
+    "messages": "Messages",
+    "novels": "Novels",
     "profile": "Profile",
     "management": "Management"
+  },
+  "terra": {
+    "create_character": "Create character",
+    "character_detail": "Character details",
+    "chat": "Chat",
+    "novel_reader": "Novel reader",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear text",
+    "loading": "Loading",
+    "empty": "No content yet",
+    "error": "Content could not be loaded",
+    "retry": "Try again",
+    "image_unavailable": "Image unavailable",
+    "online": "Online",
+    "preview": "Preview content",
+    "preview_notice": "Actions on this screen are for interface preview only.",
+    "back": "Back",
+    "close": "Close"
   },
   "auth": {
     "welcome_back": "Nice to have you back!",

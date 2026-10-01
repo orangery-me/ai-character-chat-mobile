@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ai_character_chat_mobile/common/theme/terra_colors.dart';
 
 @immutable
 class Palette extends ThemeExtension<Palette> {
@@ -31,16 +32,19 @@ class Palette extends ThemeExtension<Palette> {
   });
 
   factory Palette.light() {
-    return const Palette(
+    const TerraColors colors = TerraColors.light;
+    return Palette(
       brightness: Brightness.light,
-      scaffoldBackground: Color(0xFFFFFFFF),
-      buttonBackground: Color(0xFF106C54),
-      primaryColor: Color(0xFF106C54),
-      normalText: Color(0xFF0F1828),
-      textFieldBackground: Color(0xFFF7F7FC),
-      errorButtonLabel: Color(0xFFFF3333),
-      dialogBackground: Color(0xFFFFFFFF),
-      focusedBorderColor: Color(0xFF002DE3),
+      scaffoldBackground: colors.surface,
+      buttonBackground: colors.primary,
+      primaryColor: colors.primary,
+      normalText: colors.textPrimary,
+      textFieldBackground: colors.surfaceContainerLowest,
+      errorButtonLabel: colors.error,
+      dialogBackground: colors.surfaceContainerLowest,
+      focusedBorderColor: colors.primaryDark,
+      buttonText: colors.onPrimary,
+      hintTextField: colors.textSecondary,
     );
   }
 

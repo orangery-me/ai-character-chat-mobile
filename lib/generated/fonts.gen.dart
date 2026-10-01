@@ -10,6 +10,9 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: OpenSans
-  static const String openSans = 'OpenSans';
+  /// Font family: Literata
+  static const String literata = 'Literata';
+
+  /// Font family: NunitoSans
+  static const String nunitoSans = 'NunitoSans';
 }

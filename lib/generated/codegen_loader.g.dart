@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
 
 import 'dart:ui';
 
@@ -14,7 +14,7 @@ class CodegenLoader extends AssetLoader{
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String,dynamic> en = {
+  static const Map<String,dynamic> _en = {
   "texts": {
     "notification": "Notification",
     "success": "Success",
@@ -28,9 +28,31 @@ class CodegenLoader extends AssetLoader{
     "try_again": "Try again"
   },
   "root": {
-    "home": "Home",
+    "home": "Explore",
+    "explore": "Explore",
+    "messages": "Messages",
+    "novels": "Novels",
     "profile": "Profile",
     "management": "Management"
+  },
+  "terra": {
+    "create_character": "Create character",
+    "character_detail": "Character details",
+    "chat": "Chat",
+    "novel_reader": "Novel reader",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear text",
+    "loading": "Loading",
+    "empty": "No content yet",
+    "error": "Content could not be loaded",
+    "retry": "Try again",
+    "image_unavailable": "Image unavailable",
+    "online": "Online",
+    "preview": "Preview content",
+    "preview_notice": "Actions on this screen are for interface preview only.",
+    "back": "Back",
+    "close": "Close"
   },
   "auth": {
     "welcome_back": "Nice to have you back!",
@@ -49,7 +71,7 @@ class CodegenLoader extends AssetLoader{
     "ads": "Loading ads..."
   }
 };
-static const Map<String,dynamic> vi = {
+static const Map<String,dynamic> _vi = {
   "texts": {
     "notification": "Thông báo",
     "success": "Thành công",
@@ -63,9 +85,31 @@ static const Map<String,dynamic> vi = {
     "try_again": "Thử lại"
   },
   "root": {
-    "home": "Trang chủ",
+    "home": "Khám phá",
+    "explore": "Khám phá",
+    "messages": "Tin nhắn",
+    "novels": "Tiểu thuyết",
     "profile": "Cá nhân",
     "management": "Quản lý"
+  },
+  "terra": {
+    "create_character": "Tạo nhân vật",
+    "character_detail": "Chi tiết nhân vật",
+    "chat": "Trò chuyện",
+    "novel_reader": "Đọc tiểu thuyết",
+    "search": "Tìm kiếm",
+    "filter": "Bộ lọc",
+    "clear": "Xóa nội dung",
+    "loading": "Đang tải",
+    "empty": "Chưa có nội dung",
+    "error": "Không thể tải nội dung",
+    "retry": "Thử lại",
+    "image_unavailable": "Không có hình ảnh",
+    "online": "Đang trực tuyến",
+    "preview": "Nội dung xem trước",
+    "preview_notice": "Các thao tác ở màn hình này chỉ dùng để xem trước giao diện.",
+    "back": "Quay lại",
+    "close": "Đóng"
   },
   "auth": {
     "welcome_back": "Rất vui khi được gặp lại bạn!",
@@ -81,8 +125,8 @@ static const Map<String,dynamic> vi = {
     "not_match_password": "Mật khẩu xác nhận không trùng khớp"
   },
   "loading": {
-    "ads": "Đang tải quảng cáo ..."
+    "ads": "Đang tải quảng cáo..."
   }
 };
-static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "vi": vi};
+static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en, "vi": _vi};
 }
